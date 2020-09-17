@@ -8,7 +8,6 @@ args:
     long: directory
     about: specify directory to traverse
     takes_value: true
-    default_value: "."
   - old_extension:
     about: extension to replace
     required: true
