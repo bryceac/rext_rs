@@ -1,5 +1,6 @@
 // import clap crate, to use clap API.
-use clap::{ App, Arg };
+// use clap::{ App, Arg };
+use clap::{ App, load_yaml };
 
 // import stuff needed to interact with paths and filesystem
 use std::{ ffi::OsStr, fs, path::PathBuf};
@@ -15,7 +16,11 @@ use std::os::windows::prelude::*;
 // main function that will be run automatically
 fn main() {
 
-    // set app data and arguments
+    let yaml = load_yaml!("cli.yaml");
+
+    let matches = App::from(yaml).get_matches();
+    
+    /* // set app data and arguments
     let matches = App::new("rext")
     .version("0.1.0")
     .author("Bryce Campbell <tonyhawk2100@gmail.com>")
@@ -56,7 +61,7 @@ fn main() {
         .short('v')
         .long("verbose")
         .about("enable verbose mode")
-    ).get_matches();
+    ).get_matches(); */
 
     // attempt to retrieve the specified directory, otherwise grab the working directory.
     let directory = if let Some(dir) = matches.value_of("directory") {
