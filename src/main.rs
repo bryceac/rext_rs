@@ -30,7 +30,19 @@ fn main() {
 
     let directory = if matches.is_present("directory") {
         if let Some(dir) = matches.value_of("directory") {
-            PathBuf::from(dir)
+            if dir.starts_with("~") {
+                // attempt to expand the path
+                let input = shellexpand::tilde(dir);
+
+                // convert input to string
+                let mut path = String::new();
+
+                // create Path buffer
+                path.push_str(&input);
+                PathBuf::from(path)
+            } else { 
+                PathBuf::from(dir) 
+            }
         } else {
             current_directory
         }
