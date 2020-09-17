@@ -43,13 +43,13 @@ fn main() {
             } else if dir.starts_with("..") || dir.starts_with(".") { 
                 PathBuf::from(dir).clean()
             } else {
-                PathBuf::from(".").clean()
+                PathBuf::from("./").clean()
             }
         } else {
-            PathBuf::from(".").clean()
+            PathBuf::from("./").clean()
         }
     } else {
-        PathBuf::from(".").clean()
+        PathBuf::from("./").clean()
     };
 
     let recursive = if matches.is_present("recursive") {
