@@ -108,11 +108,19 @@ fn rename(dir: &str, old_extension: &str, new_extension: &str, recursive: bool, 
         }
     }) {
         if let Ok(entry) = item {
-            if let (Some(file_extension), Some(file_name)) = (entry.path().extension().and_then(OsStr::to_str), entry.path().file_stem().and_then(OsStr::to_str)) {
-                if file_extension == old_extension {
-                    let new_file_name = format!("{}.{}", file_name, new_extension);
-
-                    let new_path = entry.path().with_file_name(new_file_name);
+            if !entry.path().is_dir() {
+                if let (Some(file_extension), Some(file_name)) = (entry.path().extension().and_then(OsStr::to_str), entry.path().file_stem().and_then(OsStr::to_str)) {
+                    if file_extension == old_extension {
+                        let new_file_name = format!("{}.{}", file_name, new_extension);
+    
+                        let new_path = entry.path().with_file_name(new_file_name);
+    
+                        if verbose {
+                            println!("renaming {} to {}", entry.path().display(), new_path.display());
+                        }
+    
+                        fs::rename(entry.path(), new_path).expect("unable to rename file.");
+                    }
                 }
             }
         }
