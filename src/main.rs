@@ -105,7 +105,7 @@ fn main() {
 
     // pass arguments to function that will rename files
     rename(directory.to_str().unwrap_or(""), extension, new_extension, recursive, hidden, verbose)
-}
+} // end function
 
 // function to rename files in a specified directory, matching the given parameters.
 fn rename(dir: &str, old_extension: &str, new_extension: &str, recursive: bool, include_hidden: bool, verbose: bool) {
