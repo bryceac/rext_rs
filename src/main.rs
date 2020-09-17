@@ -1,6 +1,5 @@
 use clap::{ App, Arg };
-use std::path::PathBuf;
-use path_clean::PathClean;
+use std::{ fs::canonicalize, path::PathBuf};
 
 fn main() {
     let matches = App::new("rext")
@@ -41,15 +40,16 @@ fn main() {
 
                 PathBuf::from(path)
             } else if dir.starts_with("..") || dir.starts_with(".") { 
-                PathBuf::from(dir).clean()
+                canonicalize(PathBuf::from(dir)).unwrap();
             } else {
-                PathBuf::from("./").clean()
+                canonicalize(PathBuf::from(".")).unwrap() 
             }
         } else {
-            PathBuf::from("./").clean()
+            canonicalize(PathBuf::from(".")).unwrap()
+            
         }
     } else {
-        PathBuf::from("./").clean()
+        canonicalize(PathBuf::from(".")).unwrap()
     };
 
     let recursive = if matches.is_present("recursive") {
