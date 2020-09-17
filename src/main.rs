@@ -16,7 +16,7 @@ use std::os::windows::prelude::*;
 // main function that will be run automatically
 fn main() {
 
-    let yaml = load_yaml!("cli.yaml");
+    let yaml = load_yaml!("cli.yml");
 
     let app = App::from(yaml);
 
