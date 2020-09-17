@@ -18,8 +18,10 @@ fn main() {
 
     let yaml = load_yaml!("cli.yaml");
 
-    let matches = App::from(yaml).get_matches();
-    
+    let app = App::from(yaml);
+
+    let matches = app.get_matches();
+
     /* // set app data and arguments
     let matches = App::new("rext")
     .version("0.1.0")
