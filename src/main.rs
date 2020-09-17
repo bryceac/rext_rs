@@ -39,10 +39,8 @@ fn main() {
                 path.push_str(&input);
 
                 PathBuf::from(path)
-            } else if dir.starts_with("..") || dir.starts_with(".") { 
-                canonicalize(PathBuf::from(dir)).unwrap();
             } else {
-                canonicalize(PathBuf::from(".")).unwrap() 
+                canonicalize(PathBuf::from(dir)).unwrap() 
             }
         } else {
             canonicalize(PathBuf::from(".")).unwrap()
