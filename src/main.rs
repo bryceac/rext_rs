@@ -39,9 +39,12 @@ fn main() {
 
                 // create Path buffer
                 path.push_str(&input);
+
                 PathBuf::from(path)
-            } else { 
-                PathBuf::from(dir) 
+            } else if dir.starts_with("..") { 
+                let input = shellexpand::env_with_context_no_errors("..", mut context: C)
+            } else {
+                current_directory
             }
         } else {
             current_directory
