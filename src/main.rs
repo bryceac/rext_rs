@@ -1,5 +1,6 @@
 use clap::{ App, Arg };
-use std::{ env, path::PathBuf };
+use std::path::PathBuf;
+use path_clean::PathClean;
 
 fn main() {
     let matches = App::new("rext")
@@ -26,8 +27,6 @@ fn main() {
         .about("verbose output")
     ).get_matches();
 
-    let current_directory = env::current_dir().unwrap_or(PathBuf::default());
-
     let directory = if matches.is_present("directory") {
         if let Some(dir) = matches.value_of("directory") {
             if dir.starts_with("~") {
@@ -41,16 +40,16 @@ fn main() {
                 path.push_str(&input);
 
                 PathBuf::from(path)
-            } else if dir.starts_with("..") { 
-                let input = shellexpand::env_with_context_no_errors("..", mut context: C)
+            } else if dir.starts_with("..") || dir.starts_with(".") { 
+                PathBuf::from(dir).clean()
             } else {
-                current_directory
+                PathBuf::from(".").clean()
             }
         } else {
-            current_directory
+            PathBuf::from(".").clean()
         }
     } else {
-        current_directory
+        PathBuf::from(".").clean()
     };
 
     let recursive = if matches.is_present("recursive") {
