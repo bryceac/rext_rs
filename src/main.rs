@@ -55,7 +55,7 @@ fn main() {
         Arg::with_name("verbose")
         .short('v')
         .long("verbose")
-        .about("verbose output")
+        .about("enable verbose mode")
     ).get_matches();
 
     // attempt to retrieve the specified directory, otherwise grab the working directory.
@@ -96,7 +96,7 @@ fn main() {
         false
     };
 
-    // specify whether program should be verbose or not.
+    // specify whether program should run verbose in verbose or not.
     let verbose = if matches.is_present("verbose") {
         true
     } else {
