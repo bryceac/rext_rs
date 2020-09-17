@@ -66,7 +66,7 @@ fn main() {
     ).get_matches(); */
 
     // attempt to retrieve the specified directory, otherwise grab the working directory.
-    let directory = if let Some(dir) = matches.value_of("directory") {
+    /* let directory = if let Some(dir) = matches.value_of("directory") {
         if dir.starts_with("~") {
             // attempt to expand the path
             let input = shellexpand::tilde(dir);
@@ -83,7 +83,30 @@ fn main() {
         }
     } else {
         fs::canonicalize(PathBuf::from(".")).unwrap() 
-    };
+    }; */
+
+    let directory = if matches.is_present("directory") {
+        if let Some(dir) = matches.value_of("directory") {
+            if dir.starts_with("~") {
+                // attempt to expand the path
+                let input = shellexpand::tilde(dir);
+    
+                // convert input to string
+                let mut path = String::new();
+    
+                // create Path buffer
+                path.push_str(&input);
+    
+                PathBuf::from(path)
+            } else {
+                fs::canonicalize(PathBuf::from(dir)).unwrap() 
+            }
+        } else {
+            fs::canonicalize(PathBuf::from(".")).unwrap() 
+        }
+    } else {
+        fs::canonicalize(PathBuf::from(".")).unwrap() 
+    }
 
     // attempt to grab the extension to find and what to replace it with
     let extension = matches.value_of("old_extension").unwrap();
