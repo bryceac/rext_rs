@@ -19,12 +19,14 @@ fn main() {
     )
     .arg(
         Arg::with_name("old_extension")
+        .short('e')
         .about("extension to replace")
         .takes_value(true)
         .required(true)
     )
     .arg(
         Arg::with_name("new_extension")
+        .short('n')
         .about("the extension to switch to")
         .takes_value(true)
         .required(true)
