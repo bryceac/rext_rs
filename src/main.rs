@@ -1,5 +1,12 @@
 use clap::{ App, Arg };
-use std::{ fs::canonicalize, path::PathBuf};
+use std::{ fs, path::PathBuf};
+use walkdir::{DirEntry, WalkDir };
+
+#[cfg(target_os = "windows")]
+use winapi::um::winnt::*;
+
+#[cfg(target_os = "windows")]
+use std::os::windows::prelude::*;
 
 fn main() {
     let matches = App::new("rext")
@@ -40,14 +47,14 @@ fn main() {
 
                 PathBuf::from(path)
             } else {
-                canonicalize(PathBuf::from(dir)).unwrap() 
+                fs::canonicalize(PathBuf::from(dir)).unwrap() 
             }
         } else {
-            canonicalize(PathBuf::from(".")).unwrap()
+            fs::canonicalize(PathBuf::from(".")).unwrap()
             
         }
     } else {
-        canonicalize(PathBuf::from(".")).unwrap()
+        fs::canonicalize(PathBuf::from(".")).unwrap()
     };
 
     let recursive = if matches.is_present("recursive") {
@@ -68,5 +75,37 @@ fn main() {
         false
     };
 
-    println!("dir: {}\r\nrecursive: {}\r\nhidden: {}\r\nverbose: {}", directory.display(), recursive, hidden, verbose);
+    rename(directory.to_str().unwrap_or(""), recursive, hidden, verbose)
+}
+
+fn rename(dir: &str, recursive: bool, include_hidden: bool, verbose: bool) {
+    let walker = if recursive {
+        WalkDir::new(dir).into_iter()
+    } else {
+        WalkDir::new(dir).max_depth(1).into_iter()
+    };
+
+    for item in walker.filter_entry(|e| is_hidden(e) == include_hidden) {
+
+    }
+}
+
+#[cfg(target_os = "unix")]
+fn is_hidden(entry: &DirEntry) -> bool {
+    entry.file_name()
+    .to_str()
+    .map(|s| s.starts_with("."))
+    .unwrap_or(false)
+}
+
+#[cfg(target_os = "windows")]
+fn is_hidden(entry: &DirEntry) -> bool {
+    let metadata = fs::metadata(entry.path()).unwrap();
+    let attributes = metadata.file_attributes();
+
+    if attributes == FILE_ATTRIBUTE_HIDDEN {
+        true
+    } else {
+        false
+    }
 }
