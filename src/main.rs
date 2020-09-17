@@ -1,6 +1,5 @@
 // import clap crate, to use clap API.
-// use clap::{ App, Arg };
-use clap::{ App, load_yaml };
+use clap::{ App, Arg };
 
 // import stuff needed to interact with paths and filesystem
 use std::{ ffi::OsStr, fs, path::PathBuf};
@@ -16,13 +15,7 @@ use std::os::windows::prelude::*;
 // main function that will be run automatically
 fn main() {
 
-    let yaml = load_yaml!("cli.yml");
-
-    let app = App::from(yaml);
-
-    let matches = app.get_matches();
-
-    /* // set app data and arguments
+    // set app data and arguments
     let matches = App::new("rext")
     .version("0.1.0")
     .author("Bryce Campbell <tonyhawk2100@gmail.com>")
@@ -63,27 +56,7 @@ fn main() {
         .short('v')
         .long("verbose")
         .about("enable verbose mode")
-    ).get_matches(); */
-
-    // attempt to retrieve the specified directory, otherwise grab the working directory.
-    /* let directory = if let Some(dir) = matches.value_of("directory") {
-        if dir.starts_with("~") {
-            // attempt to expand the path
-            let input = shellexpand::tilde(dir);
-
-            // convert input to string
-            let mut path = String::new();
-
-            // create Path buffer
-            path.push_str(&input);
-
-            PathBuf::from(path)
-        } else {
-            fs::canonicalize(PathBuf::from(dir)).unwrap() 
-        }
-    } else {
-        fs::canonicalize(PathBuf::from(".")).unwrap() 
-    }; */
+    ).get_matches();
 
     let directory = if matches.is_present("directory") {
         if let Some(dir) = matches.value_of("directory") {
