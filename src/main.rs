@@ -106,7 +106,7 @@ fn main() {
         }
     } else {
         fs::canonicalize(PathBuf::from(".")).unwrap() 
-    }
+    };
 
     // attempt to grab the extension to find and what to replace it with
     let extension = matches.value_of("old_extension").unwrap();
