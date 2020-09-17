@@ -14,19 +14,19 @@ fn main() {
     .author("Bryce Campbell <tonyhawk2100@gmail.com>")
     .about("tool that allows extensions to be changed easily")
     .arg(Arg::with_name("directory")
+        .short('d')
         .about("directory to use")
         .takes_value(true)
+        .default_value(".")
     )
     .arg(
         Arg::with_name("old_extension")
-        .short('e')
         .about("extension to replace")
         .takes_value(true)
         .required(true)
     )
     .arg(
         Arg::with_name("new_extension")
-        .short('n')
         .about("the extension to switch to")
         .takes_value(true)
         .required(true)
@@ -47,28 +47,23 @@ fn main() {
         .about("verbose output")
     ).get_matches();
 
-    let directory = if matches.is_present("directory") {
-        if let Some(dir) = matches.value_of("directory") {
-            if dir.starts_with("~") {
-                // attempt to expand the path
-                let input = shellexpand::tilde(dir);
+    let directory = if let Some(dir) = matches.value_of("directory") {
+        if dir.starts_with("~") {
+            // attempt to expand the path
+            let input = shellexpand::tilde(dir);
 
-                // convert input to string
-                let mut path = String::new();
+            // convert input to string
+            let mut path = String::new();
 
-                // create Path buffer
-                path.push_str(&input);
+            // create Path buffer
+            path.push_str(&input);
 
-                PathBuf::from(path)
-            } else {
-                fs::canonicalize(PathBuf::from(dir)).unwrap() 
-            }
+            PathBuf::from(path)
         } else {
-            fs::canonicalize(PathBuf::from(".")).unwrap()
-            
+            fs::canonicalize(PathBuf::from(dir)).unwrap() 
         }
     } else {
-        fs::canonicalize(PathBuf::from(".")).unwrap()
+        fs::canonicalize(PathBuf::from(".")).unwrap() 
     };
 
     let extension = matches.value_of("old_extension").unwrap();
