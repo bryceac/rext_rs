@@ -22,7 +22,8 @@ fn main() {
     .about("tool that allows extensions to be changed easily")
     .arg(Arg::with_name("directory")
         .short('d')
-        .about("directory to use")
+        .long("directory")
+        .about("directory to go through")
         .takes_value(true)
         .default_value(".")
     )
@@ -41,16 +42,19 @@ fn main() {
     .arg(
         Arg::with_name("recursive")
         .short('r')
-        .about("specify that recursive operation is desired.")
+        .long("recursive")
+        .about("specify that recursive operation is desired")
     )
     .arg(
         Arg::with_name("hidden")
         .short('H')
-        .about("include in hidden files.")
+        .long("include-hidden")
+        .about("include hidden files.")
     )
     .arg(
         Arg::with_name("verbose")
         .short('v')
+        .long("verbose")
         .about("verbose output")
     ).get_matches();
 
