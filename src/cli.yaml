@@ -6,26 +6,26 @@ args:
   - directory:
     short: d
     long: directory
-    help: specify directory to traverse
+    about: specify directory to traverse
     takes_value: true
     default_value: "."
   - old_extension:
-    help: extension to replace
+    about: extension to replace
     required: true
     takes_value: true
   - new_extension:
-    help: new extension
+    about: new extension
     required: true
     takes_value: true
   - recursive:
     short: r
     long: recursive
-    help: enables recursive mode
+    about: enables recursive mode
   - hidden:
     short: H
     long: include-hidden
-    help: include hidden files
+    about: include hidden files
   - verbose:
     short: v
     long: verbose
-    help: enable verbose mode
+    about: enable verbose mode
