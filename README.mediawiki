@@ -3,7 +3,9 @@
 '''Description:''' Rust port of <a href="https://github.com/bryceac/rext">rext</a>.
 
 '''Version:''' 0.1
+
 '''Creator:''' Bryce Campbell
+
 '''License:''' See License
 
 ==Notes==
