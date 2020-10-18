@@ -48,7 +48,7 @@ make install
 
 Or use the MSI file that should be included with releases, if on Windows.
 
-However, you are using either Mac or Linux, I strongly recommend installing via Homebrew, using my homebrew repositories ([https://github.com/bryceac/homebrew-mac Mac] and [https://github.com/homebrew-linux Linux]), which will install the Swift versiom and include a man page, while this one will not.
+However, you are using either Mac or Linux, I strongly recommend installing via Homebrew, using my homebrew repositories ([https://github.com/bryceac/homebrew-mac Mac] and [https://github.com/bryceac/homebrew-linux Linux]), which will install the Swift versiom and include a man page, while this one will not.
 
 ===Usage===
 
