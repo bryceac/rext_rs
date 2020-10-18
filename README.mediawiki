@@ -1,0 +1,23 @@
+=rext_rs=
+
+'''Description:''' Rust port of <a href="https://github.com/bryceac/rext">rext</a>.
+
+'''Version:''' 0.1
+'''Creator:''' Bryce Campbell
+'''License:''' See License
+
+==Notes==
+
+This application has only been tested on Windows 10, but should work on any system that can compile and run Rust applications.
+
+It <strong>should</strong> have the same capabilities of the 0.2 release of the original version written in Apple's Swift, which provides some better conveniences, as some features were added to that variant while working on this.
+
+===Building===
+
+This tool requires Cargo, which should be included as part of the [https://doc.rust-lang.org/book/ch01-01-installation.html Rust installation process], as that is the only way to import dependencies.
+
+To build the program, run the following in the directory after cloning this repo or downloading the archive:
+
+<pre>
+cargo build
+</pre>
