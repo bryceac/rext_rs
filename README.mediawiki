@@ -21,3 +21,37 @@ To build the program, run the following in the directory after cloning this repo
 <pre>
 cargo build
 </pre>
+
+This will create an executable that can be immediate run via:
+
+<pre>
+cargo run
+</pre>
+
+Arguments can be passed by placing anything meant for the binary like this:
+
+<pre>
+cargo run -- php txt
+</pre>
+
+===Usage===
+
+While things are quite similiar to the original version written in Swift, there are some differences.
+
+For example, while flags and options can be combined in the Swift version, the same cannot be done here.
+
+So, specifying a directory and working recurively would be done like this:
+
+<pre>
+rext -d ~/Documents -r php txt
+</pre>
+
+I am not sure when or if this will be fix, as I plan to only work on this port until the Swift Package Manager finally works on more than just Mac and Linux.
+
+Otherwise, things should be no different, aside from the code used to perform the same operations.
+
+===Support===
+
+Being that I am not as experienced with Rust as I am with Swift, and that I have a higher preference for Swift, I will likely not be able to be of much help, especially considering that some issues may reside with the crates used. 
+
+However, I will try my best for as long as I work on this port of the program, which will be on as needed basis.
