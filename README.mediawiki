@@ -46,7 +46,7 @@ You can either run the following as root/superuser on a Unix-like OS:
 make install
 </pre>
 
-Or use the MSI file that should be included with release, if on Windows.
+Or use the MSI file that should be included with releases, if on Windows.
 
 However, you are using either Mac or Linux, I strongly recommend installing via Homebrew, using my homebrew repositories, which will install the Swift versiom and include a man page, while this one will not.
 
